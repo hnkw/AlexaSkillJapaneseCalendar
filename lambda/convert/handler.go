@@ -2,17 +2,17 @@ package main
 
 import (
 	"context"
-	"fmt"
+	"log"
 
 	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/mikeflynn/go-alexa/skillserver"
 )
 
-type Event struct {
-	Name string `json:"name"`
-}
-
-func handle(ctx context.Context, event Event) (string, error) {
-	return fmt.Sprintf("Hello ctx %+v, %s!", ctx, event.Name), nil
+func handle(ctx context.Context, er *skillserver.EchoRequest) (*skillserver.EchoResponse, error) {
+	log.Printf("Hello requeset %+v", er)
+	resp := skillserver.NewEchoResponse()
+	resp.Card("test", "test")
+	return resp, nil
 }
 
 func main() {
