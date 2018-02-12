@@ -12,6 +12,7 @@ _build_pkg() {
 	(
 		cd "${base_dir}/lambda/$pkg"
 		GOOS="${os}" GOARCH="${arch}" go build
+		ls -l "${base_dir}/lambda/${pkg}/${pkg}"
 	)
 }
 
