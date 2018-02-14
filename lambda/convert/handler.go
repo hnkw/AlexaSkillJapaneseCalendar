@@ -28,7 +28,16 @@ func convert(t time.Time) (nengo string, no int, err error) {
 
 func parseTime(amzdate string) (time.Time, error) {
 	amzdate = strings.Replace(amzdate, "XX", "01", 2)
-	return time.Parse("2006-01-02", amzdate)
+
+	if t, err := time.Parse("2006-01-02", amzdate); err == nil {
+		return t, nil
+	}
+
+	if t, err := time.Parse("2006", amzdate); err == nil {
+		return t, nil
+	}
+
+	return time.Time{}, fmt.Errorf("failed to parse time, amzdate %s", amzdate)
 }
 
 func outputSpeech(t time.Time, nengo string, no int) string {

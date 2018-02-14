@@ -45,3 +45,11 @@ func (suite *handlerTestSuite) Test_parseTime_complete() {
 	suite.Assert().NoError(err)
 	suite.Assert().Equal(expected, actual)
 }
+
+func (suite *handlerTestSuite) Test_parseTime_yearOnly() {
+	expected, err := time.Parse("2006", "2018")
+	suite.Assert().NoError(err)
+	actual, err := parseTime("2018")
+	suite.Assert().NoError(err)
+	suite.Assert().Equal(expected, actual)
+}
